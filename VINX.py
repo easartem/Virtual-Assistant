@@ -1,4 +1,4 @@
-import tkinter
+import tkinter as tk
 from tkinter import *
 import PIL
 from PIL import Image, ImageTk
@@ -23,23 +23,45 @@ def speak(text):
 
 #-----------------------------GUI-------------------------------------------------
 
-''' Main Window'''
-root = Tk()
-root.title("My virtual assistant")
-#root.geometry("500x100") #Width x Height
 
-''' Background Picture'''
-bg_pic = ImageTk.PhotoImage(Image.open("vinx_mic_off.png"))
-bg_label = Label(image=bg_pic)
-bg_label.pack()
+BG_COLOR = "#ff5757"
+BG_PIC_OFF = "Images/vinx_mic_off.png"
+BG_PIC_ON = "Images/vinx_mic_on.png"
+BTN_START_BG = "Images/activation_btn.png"
 
-''' SCRIPT'''
-def activateAI():
-    return 
+class MainWindow():
+    '''Use class attributes to define properties that should have the same value for every class instance. 
+    Use instance attributes for properties that vary from one instance to another.'''
+    #Class Attributes
 
-''' Button Start'''
-btn_start = Button(root, text="Activer", command=activateAI)
-btn_start.place(x=0,y=0)
+    # Constructors & Instance attribute
+    def __init__(self):
+        print("Building GUI...")
+
+        ''' Main Window'''
+        self.root = tk.Tk() #self. indicates that they are instance variables
+        self.root.geometry('500x500')
+        self.root.title("My virtual assistant")
+
+        ''' Background Picture'''
+        bg_pic = ImageTk.PhotoImage(Image.open(BG_PIC_OFF))
+        self.bg_label = Label(image=bg_pic)
+        self.bg_label.place(x=0,y=0)
+
+        ''' Activation Button'''
+        btn_start_bg = ImageTk.PhotoImage(Image.open(BTN_START_BG))
+        self.btn_start = Button(self.root, image=btn_start_bg, borderwidth=0, highlightthickness=0, bg=BG_COLOR) #command=activateAI)
+        self.btn_start.place(x=145,y=400)
+        #btn_start.place(x=0,y=0)
+
+        ''' Run window'''
+        self.root.mainloop()
+
+    # Methods - Behaviours 
+    def activateAI(self):
+        return 
 
 
-root.mainloop()
+if __name__ == '__main__':
+ 
+    app = MainWindow() # create a mainwindow object and store the reference in variable app
