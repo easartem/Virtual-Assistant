@@ -34,3 +34,7 @@ conda activate env
 # In cmd, run the GUI
 python VINX_GUI.py
 ```
+
+## GUI Preview
+
+![Vinx_Preview](/Images/preview.png)
