@@ -22,13 +22,48 @@ class Assistant():
         self.engine  = pyttsx3.init()
         voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', voices[0].id)
-        pyttsx3.speak("Démarrage de l'assistant")
+        self.speak("Démarrage de l'assistant") 
 
-        '''Speech-To-Text engine'''
-        print("Vinx is listenning...")
+        '''Speech-To-Text recognizer'''
     
     
     # Methods - Behaviours 
+
+    '''Text-To-Speech engine'''
     def speak(self, text):
+        print("Entering self-made speak function")
         self.engine.say(text)
         self.engine.runAndWait()
+
+    '''Text-To-Speech engine''' 
+    def listen(self):
+        print("Vinx is listenning...")
+        # get audio from the microphone
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print("Listening...")
+            audio=r.listen(source)
+            
+        # try to use Google's speech recognition API to convert audio to text
+        try:
+            speech = r.recognize_google(audio, language="fr-FR") #'en-in' if necessary
+            print("You said : ", speech, "\n")
+            self.speak("Tu as dit")
+            self.speak(speech)
+
+        except sr.UnknownValueError:
+            print("Ai couldn't understant what you said")
+            self.speak("Je n'ai pas compris, pouvez-vous répéter")
+            return "None"
+        except sr.RequestError as e:
+            print("Ai couldn't request results; {0}".format(e))
+            return "None"
+        return speech
+
+    '''Text-To-Speech engine'''
+    def runAssistant(self):
+        txt = self.listen()
+        self.speak(txt)
+
+
+

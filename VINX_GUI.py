@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import *
-import PIL
 from PIL import Image, ImageTk
 import VINX_Engine as engine
 
@@ -55,9 +54,11 @@ class MainWindow():
         # Background button change to show that button was clicked 
         self.btn_wait_bg = ImageTk.PhotoImage(Image.open(BTN_WAIT_BG))
         self.btn_start.config(image=self.btn_wait_bg)
+        
         # Create an assistant instance, while assistant is working keep GUI on
         vinx = engine.Assistant()
-        vinx.speak("J'espère que ça fonctionne encore")
+        vinx.runAssistant()
+        
         # Turn GUI off 
         return 
 
