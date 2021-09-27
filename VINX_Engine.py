@@ -1,6 +1,6 @@
 import speech_recognition as sr
 import pyttsx3
-import datetime
+import VINX_Utils as util
 
 print("Opening script...")
 
@@ -63,7 +63,15 @@ class Assistant():
     '''Text-To-Speech engine'''
     def runAssistant(self):
         txt = self.listen()
-        self.speak(txt)
+        #self.speak(txt)
+        if "heure" in txt:
+            self.speak("Vous avez utilisé le mot heure")
+            current_time = util.get_time()
+            self.speak("il est " + current_time)
+        elif "cherche" in txt:
+            self.speak("Vous avez utilisé le mot cherche")
+        else:
+            self.speak("Je n'ai pas compris, pouvez vous-répéter ?")
 
 
 
